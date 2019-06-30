@@ -34,11 +34,16 @@
 #  error charconv requires C++ compilation (use a .cpp suffix)
 #endif
 
+#ifndef _WIN32
+#  error windows platform needed
+#endif
+
 #pragma warning(disable: 4786)
 #include <string>
 #include <sstream>
 
-_STD_BEGIN
+namespace std {
+
 //strutf8类型定义，同string同类型
 typedef string strutf8;
 //tstring类型定义
@@ -49,7 +54,8 @@ typedef wstringstream tstringstream;
 typedef string tstring;
 typedef stringstream tstringstream;
 #endif
-_STD_END
+
+} // namespace std
 
 // 
 template <class _Self> _Self _StoS(const _Self &_self)
@@ -129,4 +135,4 @@ std::string WtoA(const std::wstring &str);
 #  define TtoU AtoU
 #endif
 
-#endif
+#endif // _CHARCONV_H
